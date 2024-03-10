@@ -17,13 +17,13 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String account = req.getParameter("account");
+        String username = req.getParameter("username");
         String password = req.getParameter("password");
-
-        if (account.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
-            req.getSession().setAttribute("account", account);
+        System.out.println("username = " + username + ", password = " + password);
+        if ("admin".equalsIgnoreCase(username) && "admin".equalsIgnoreCase(password)) {
+            req.getSession().setAttribute("account", username);
             System.out.println("Đăng nhập thành công");
-            resp.sendRedirect(req.getContextPath() + "/employee");
+            resp.sendRedirect(req.getContextPath() + "/employee/list");
         } else {
             System.out.println("Đăng nhập thất bại");
             req.setAttribute("error", "Sai tài khoản hoặc mật khẩu");
