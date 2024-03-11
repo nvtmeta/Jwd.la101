@@ -28,52 +28,11 @@
 
 <body>
 <div class="flex flex-col ">
-    <!-- header_fragment -->
-    <header class="bg-[#F8F8F8] flex justify-between fixed top-0 w-full z-10 h-16">
-        <!-- logo -->
-        <div class="flex items-center ml-2 justify-center text-gray-600 gap-2">
-            <i class="fa-solid fa-users text-2xl"></i>
-            <a href="/employeeList_assi_01.html" class="text-2xl font-medium text-center ">Employee</a>
-        </div>
-        <!-- logout -->
-        <div class="flex items-center mr-4 justify-center text-purple-600 gap-6">
-                <span>
-                    Welcome Long
-                </span>
-            <div>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="" class="">Logout</a>
-            </div>
-        </div>
-    </header>
 
+    <jsp:include page="../../fragment/header.jsp"/>
     <div class="bg-[#ccc] flex top-16 relative">
-        <!-- sidebar -->
-        <!-- sidebar fragment -->
-        <sidebar class="bg-[#F8F8F8]  w-1/5 h-screen">
-            <div class="border-b-2 p-3 text-blue-500">
-                <i class="fa-solid fa-gauge"></i>
-                <a href="#" class="">Dashboard</a>
-            </div>
-            <div class="collapse collapse-arrow ">
-                <input type="radio" name="my-accordion-2"/>
-                <div class="collapse-title ">
-                    <i class="fa-solid fa-chart-column text-blue-500"></i>
-                    <a href="#" class="text-blue-500">Employee manager</a>
-                </div>
-                <div class="collapse-content">
-                    <div class="border-b-2 p-3 text-blue-500">
-                        <i class="fa-solid fa-list"></i>
-                        <a href="#" class="">Employee list</a>
-                    </div>
-                    <div class="border-b-2 p-3 text-blue-500">
-                        <i class="fa-solid fa-plus"></i>
-                        <a href="#" class="">Add Employee</a>
-                    </div>
-                </div>
-            </div>
+        <jsp:include page="../../fragment/sidebar.jsp"/>
 
-        </sidebar>
         <!-- content -->
         <div class="w-4/5 bg-white p-2">
             <h1 class="font-medium py-3 text-4xl">Employee List</h1>
@@ -122,8 +81,14 @@
                     </button>
                 </form>
 
-                <!-- table -->
+
                 <div class="overflow-x-auto mt-10">
+                    <!-- table -->
+                    <div class="mb-2">
+                        Total employee: <i class="font-bold">
+                        <%= request.getAttribute("totalEmployee") %>
+                    </i>
+                    </div>
                     <table class="table border-[1px] border-solid border-[#eeeeee] ">
                         <!-- head -->
                         <thead>
@@ -135,6 +100,7 @@
                             <th class="border-[1px] border-solid border-[#eeeeee]">Phone number</th>
                             <th class="border-[1px] border-solid border-[#eeeeee]">Address</th>
                             <th class="border-[1px] border-solid border-[#eeeeee]">Department</th>
+                            <th class="border-[1px] border-solid border-[#eeeeee]">Action</th>
                         </tr>
                         </thead>
                         <tbody class="">
@@ -165,7 +131,20 @@
                             <td class="border-[1px] border-solid border-[#eeeeee]">
                                 <%=employee.getDepartmentName()%>
                             </td>
-
+                            <td class="flex items-center justify-start [1px] border-solid border-[#eeeeee]">
+                                <a href="${pageContext.request.contextPath}/employee/detail"
+                                   class="p-2 cursor-pointer gap-1 rounded-l-sm text-[#347ab6]  px-4 flex items-center
+                                            justify-center ">
+                                    <i class="fa-solid fa-eye"></i>
+                                    <span>View</span>
+                                </a>
+                                |
+                                <div class="p-2 cursor-pointer gap-1  rounded-l-sm text-red-700  px-4 flex items-center
+                                        justify-center ">
+                                    <i class="fa-solid fa-trash"></i>
+                                    <span>Delete</span>
+                                </div>
+                            </td>
                         </tr>
                         <%
                             }
@@ -174,24 +153,36 @@
                     </table>
                 </div>
 
-                <!-- pagination -->
-                <div class="border-[1px] mt-10 border-solid border-[#eeeeee] w-fit">
-                    <div class="join ">
-                        <button
-                                class=" w-20 btn rounded-none m-0 p-0 border-[1px] border-solid border-[#ccc]">Previous
-                        </button>
-                        <input class="join-item btn   border-[1px] border-solid border-[#ccc]" type="radio"
-                               name="options" aria-label="1" checked/>
-                        <input class="join-item btn  border-[1px] border-solid border-[#ccc]" type="radio"
-                               name="options" aria-label="2"/>
-                        <input class="join-item btn  border-[1px] border-solid border-[#ccc]" type="radio"
-                               name="options" aria-label="3"/>
-                        <input class="join-item btn  border-[1px] border-solid border-[#ccc]" type="radio"
-                               name="options" aria-label="4"/>
-                        <button class="btn rounded-none m-0 p-0 w-20 text-blue-500">Next</button>
-                    </div>
-                </div>
-
+                <%--   pagination--%>
+                <ul class="flex items-center border-[1px] mt-10 border-solid border-[#eeeeee] w-fit">
+                    <% int activePage = (int) request.getAttribute("page");
+                        if (activePage > 1) {
+                    %>
+                    <button class="w-20 btn rounded-none m-0 p-0 border-[1px] border-solid border-[#ccc]">
+                        <a
+                                href="${pageContext.request.contextPath}/employee/list?page=<%= activePage - 1%>">
+                            Previous
+                        </a>
+                    </button>
+                    <% }
+                        long totalPage = (long) request.getAttribute("totalPage");
+                        for (int i = 0; i < totalPage; i++) { %>
+                    <li class="p-3 border-[1px] border-solid border-[#ccc] m-0 text-[#347ab6] <%= activePage == (i + 1)  ? "bg-[#347ab6] text-white" : ""%>">
+                        <a class="page-link"
+                           href="<%=activePage == (i + 1) ? "javascript:void(0)" : request.getContextPath() + "/employee/list?page=" + (i + 1) %>">
+                            <%=i + 1%>
+                        </a>
+                    </li>
+                    <% }
+                        if (activePage < totalPage) { %>
+                    <button class="btn rounded-none m-0 p-[-5px] w-20 text-[#347ab6]">
+                        <a
+                                href="${pageContext.request.contextPath}/employee/list?page=<%= activePage +1%>">
+                            Next
+                        </a>
+                    </button>
+                    <% } %>
+                </ul>
             </div>
         </div>
     </div>

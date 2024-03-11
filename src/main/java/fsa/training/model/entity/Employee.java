@@ -48,7 +48,7 @@ public class Employee {
     @Column(name = "remark", columnDefinition = "varchar(1000)", nullable = false)
     private String remark;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Account account;
 
 }
