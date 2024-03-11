@@ -32,7 +32,7 @@
                             First Name
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="firstName" size="50" type="text" placeholder="First name"
+                        <input required name="firstName" size="50" type="text" placeholder="First name"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -40,7 +40,7 @@
                             Last Name
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="lastName" size="50" type="text" placeholder="Last name"
+                        <input required name="lastName" size="50" type="text" placeholder="Last name"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -48,7 +48,7 @@
                             Phone number
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="phoneNumber" size="50" type="number" placeholder="Phone number"
+                        <input required name="phoneNumber" size="50" type="number" placeholder="Phone number"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -56,7 +56,7 @@
                             Date of birth
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="dateOfBirth" type="date" placeholder="Phone number"
+                        <input required name="dateOfBirth" type="date" placeholder="Phone number"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -65,9 +65,9 @@
                             <span class="text-red-500">(*)</span>
                         </label>
                         <div class="flex items-center mt-3 gap-3">
-                            <input id="male" type="radio" name="male" class="radio" checked/>
+                            <input required id="male" value="1" type="radio" name="gender" class="radio"/>
                             <label for="male" class="font-bold">Male</label>
-                            <input id="female" type="radio" name="female" class="radio"/>
+                            <input required id="female" value="0" type="radio" name="gender" class="radio"/>
                             <label for="female" class="font-bold">Female</label>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             Account
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="account" size="50" type="text" placeholder="Account"
+                        <input required name="account" size="50" type="text" placeholder="Account"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -84,14 +84,14 @@
                             Email
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="email" size="50" type="email" placeholder="Email" class="input mt-2 input-bordered w-[60rem] "/>
+                        <input required name="email" size="50" type="email" placeholder="Email" class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
                         <label class="font-bold">
                             Password
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input name="password" size="100" type="password" placeholder="Password"
+                        <input required name="password" size="100" type="password" placeholder="Password"
                                class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
@@ -105,7 +105,7 @@
                             Status
                         </label>
                         <div class="ml-20 mt-6 flex items-center gap-3">
-                            <input name="active" type="checkbox" checked="checked" class="checkbox"/>
+                            <input name="status" type="checkbox" value="1"  class="checkbox"/>
                             <span>Active</span>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                             Department
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <select name="departmentName" class="select select-bordered w-full">
+                        <select required name="departmentName" class="select select-bordered w-full">
                             <option disabled selected>Fsoft Academy</option>
                             <option>Fpt Automation</option>
                         </select>

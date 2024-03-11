@@ -21,18 +21,18 @@ public class EmployeeAddController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String firstName = req.getParameter("firstName");
-       String lastName = req.getParameter("lastName");
-       String phone = req.getParameter("phone");
-       LocalDate dateOfBirth = LocalDate.parse(req.getParameter("dateOfBirth"));
-       int gender = Integer.parseInt(req.getParameter("gender"));
-       String address = req.getParameter("address");
-       int status = Integer.parseInt(req.getParameter("status"));
-       String department = req.getParameter("department");
-       String remark = req.getParameter("remark");
-       String account = req.getParameter("account");
-       String email = req.getParameter("email");
-       String password = req.getParameter("password");
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String phone = req.getParameter("phoneNumber");
+        LocalDate dateOfBirth = LocalDate.parse(req.getParameter("dateOfBirth"));
+        int gender = Integer.parseInt(req.getParameter("gender"));
+        String address = req.getParameter("address");
+        int status = Integer.parseInt(req.getParameter("status"));
+        String department = req.getParameter("department");
+        String remark = req.getParameter("remark");
+        String account = req.getParameter("account");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
 
         System.out.println("firstName = " + firstName);
         System.out.println("lastName = " + lastName);
@@ -47,29 +47,28 @@ public class EmployeeAddController extends HttpServlet {
         System.out.println("email = " + email);
         System.out.println("password = " + password);
 
-//        Employee employee = Employee.builder()
-//                .firstName(firstName)
-//                .lastName(lastName)
-//                .phone(phone)
-//                .dateOfBirth(dateOfBirth)
-//                .gender(gender)
-//                .address(address)
-//                .remark(remark)
-//                .departmentName(department)
-//                .build();
-//
-//        Account account1 = Account.builder()
-//                .account(account)
-//                .email(email)
-//                .password(password)
-//                .status(status)
-//                .employee(employee)
-//                .build();
-//
-//        employee.setAccount(account1);
-//        employeeService.create(employee);
+        Employee employee = Employee.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .phone(phone)
+                .dateOfBirth(dateOfBirth)
+                .gender(gender)
+                .address(address)
+                .remark(remark)
+                .departmentName(department)
+                .build();
 
-//        resp.sendRedirect("/employee/list");
+        Account account1 = Account.builder()
+                .account(account)
+                .email(email)
+                .password(password)
+                .status(status)
+                .employee(employee)
+                .build();
+
+        employeeService.create(employee);
+
+        resp.sendRedirect(req.getContextPath() + "/employee/list");
     }
 
     @Override

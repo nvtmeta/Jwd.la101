@@ -16,7 +16,7 @@
     <!-- logo -->
     <div class="flex items-center ml-2 justify-center text-gray-600 gap-2">
         <i class="fa-solid fa-users text-2xl"></i>
-        <a href="/employeeList_assi_01.html" class="text-2xl font-medium text-center ">Employee</a>
+        <a href="${pageContext.request.contextPath}/employee" class="text-2xl font-medium text-center ">Employee</a>
     </div>
     <!-- logout -->
     <div class="flex items-center mr-4 justify-center text-purple-600 gap-6">
