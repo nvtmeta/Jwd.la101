@@ -33,6 +33,17 @@
     <div class="bg-[#ccc] flex top-16 relative">
         <jsp:include page="../../fragment/sidebar.jsp"/>
 
+        <% String message = request.getParameter("message"); %>
+        <% if (message != null && !message.isEmpty()) { %>
+        <div class="toast">
+            <div class="alert alert-info">
+                <span>
+           <%=message%>
+              </span>
+            </div>
+        </div>
+        <% } %>
+
         <!-- content -->
         <div class="w-4/5 bg-white p-2">
             <h1 class="font-medium py-3 text-4xl">Employee List</h1>
@@ -132,18 +143,19 @@
                                 <%=employee.getDepartmentName()%>
                             </td>
                             <td class="flex items-center justify-start [1px] border-solid border-[#eeeeee]">
-                                <a href="${pageContext.request.contextPath}/employee/detail"
+                                <a href="${pageContext.request.contextPath}/employee/detail?id=<%=employee.getId()%>"
                                    class="p-2 cursor-pointer gap-1 rounded-l-sm text-[#347ab6]  px-4 flex items-center
                                             justify-center ">
                                     <i class="fa-solid fa-eye"></i>
                                     <span>View</span>
                                 </a>
                                 |
-                                <div class="p-2 cursor-pointer gap-1  rounded-l-sm text-red-700  px-4 flex items-center
+                                <a href="${pageContext.request.contextPath}/employee/delete?id=<%=employee.getId()%>"
+                                   class="p-2 cursor-pointer gap-1  rounded-l-sm text-red-700  px-4 flex items-center
                                         justify-center ">
                                     <i class="fa-solid fa-trash"></i>
                                     <span>Delete</span>
-                                </div>
+                                </a>
                             </td>
                         </tr>
                         <%
@@ -186,6 +198,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </body>

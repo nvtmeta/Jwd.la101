@@ -1,10 +1,7 @@
 package fsa.training.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -31,8 +28,9 @@ public class Account {
     @Column(name = "status", columnDefinition = "int", nullable = false)
     private Integer status;
 
-    @OneToOne
-    @JoinColumn(name = "Employeeemployee_id", referencedColumnName = "employee_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Employeeemployee_id")
+    @ToString.Exclude
     private Employee employee;
 
 }

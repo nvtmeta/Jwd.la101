@@ -17,6 +17,7 @@
 </head>
 <body>
 
+
 <div class="flex flex-col">
     <jsp:include page="../../fragment/header.jsp"/>
     <div class="bg-[#ccc] flex top-16 relative">
@@ -67,7 +68,7 @@
                         <div class="flex items-center mt-3 gap-3">
                             <input required id="male" value="1" type="radio" name="gender" class="radio"/>
                             <label for="male" class="font-bold">Male</label>
-                            <input required id="female" value="0" type="radio" name="gender" class="radio"/>
+                            <input  required id="female" value="0" type="radio" name="gender" class="radio"/>
                             <label for="female" class="font-bold">Female</label>
                         </div>
                     </div>
@@ -84,7 +85,8 @@
                             Email
                             <span class="text-red-500">(*)</span>
                         </label>
-                        <input required name="email" size="50" type="email" placeholder="Email" class="input mt-2 input-bordered w-[60rem] "/>
+                        <input required name="email" size="50" type="email" placeholder="Email"
+                               class="input mt-2 input-bordered w-[60rem] "/>
                     </div>
                     <div class="flex flex-col">
                         <label class="font-bold">
@@ -93,6 +95,12 @@
                         </label>
                         <input required name="password" size="100" type="password" placeholder="Password"
                                class="input mt-2 input-bordered w-[60rem] "/>
+                        <% String message = request.getParameter("message"); %>
+                        <% if (message != null && !message.isEmpty()) { %>
+                        <p class="text-red-600">
+                            <%=message%>
+                        </p>
+                        <% } %>
                     </div>
                     <div class="flex flex-col">
                         <label class="font-bold mb-3">
@@ -105,7 +113,7 @@
                             Status
                         </label>
                         <div class="ml-20 mt-6 flex items-center gap-3">
-                            <input name="status" type="checkbox" value="1"  class="checkbox"/>
+                            <input name="status" type="checkbox" value="1" class="checkbox"/>
                             <span>Active</span>
                         </div>
                     </div>
@@ -120,7 +128,7 @@
                         </select>
                     </div>
                     <div class="flex flex-col">
-                        <label  class="font-bold mb-3">
+                        <label class="font-bold mb-3">
                             Remark
                         </label>
                         <textarea name="remark" class="textarea textarea-bordered" placeholder=""></textarea>
@@ -128,10 +136,10 @@
 
                     <!-- submit , reset. add -->
                     <div class="flex mt-3 gap-3">
-                        <button href="${pageContext.request.contextPath}/employee/list" class="text-white btn btn-info">
+                        <a href="${pageContext.request.contextPath}/employee/list" class="text-white btn btn-info">
                             <i class="fa-solid fa-backward"></i>
                             <span>Back</span>
-                        </button>
+                        </a>
                         <button type="reset" class="text-white btn bg-orange-500">
                             <i class="fa-solid fa-rotate-right"></i>
                             <span>Reset</span>
