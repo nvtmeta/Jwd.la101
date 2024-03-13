@@ -57,4 +57,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findById(long id) {
         return employeeDao.getById(id);
     }
+
+    @Override
+    public List<EmployeeListDto> search(String field, String value, int page, int size) {
+        List<Employee> employeeList = employeeDao.searchByField(field, value, page, size);
+
+        return employeeList.stream().map(e -> {
+                    return new EmployeeListDto(
+                            e.getEmployeeId(), e.getFirstName(), e.getDateOfBirth(),
+                            e.getAddress(), e.getPhone(), e.getDepartmentName());
+                }
+        ).collect(Collectors.toList());
+    }
 }

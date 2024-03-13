@@ -49,7 +49,8 @@
             <h1 class="font-medium py-3 text-4xl">Employee List</h1>
             <div class="p-3  border-t-[1px] border-solid border-slate-300">
                 <!-- action_sort -->
-                <form class="flex justify-end  mx-auto gap-2 rounded-l-sm ">
+                <form action=" ${pageContext.request.contextPath}/employee/search" method="post"
+                      class="flex justify-end  mx-auto gap-2 rounded-l-sm ">
                     <!-- <label for="default-search p-2 bg-[#ccc]"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label> -->
                     <!-- search -->
@@ -62,7 +63,7 @@
                                       stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" id="default-search"
+                        <input name="searchContent" type="search" id="default-search"
                                class="block w-full w-4/5 p-2 border-[1px] border-solid border-slate-300 ps-10 text-sm text-gray-900 rounded-r-lg bg-white  "
                                placeholder="User Search" required/>
                     </div>
@@ -74,14 +75,19 @@
                             <span>Filter By</span>
                         </div>
                         <div class="dropdown border-[1px] border-solid border-[#ccc]">
-                            <div tabindex="0" role="button" class="ml-2 p-2 w-24 bg-white">
-                                Name
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                            <ul tabindex="0" class="dropdown-content bg-white z-[1] menu  shadow  rounded-box w-52">
-                                <li><a>Item 1</a></li>
-                                <li><a>Item 2</a></li>
-                            </ul>
+<%--                            <div tabindex="0" role="button" class="ml-2 p-2 w-24 bg-white">--%>
+<%--                                Name--%>
+<%--                                <i class="fa-solid fa-caret-down"></i>--%>
+<%--                            </div>--%>
+<%--                            <ul tabindex="0" class="dropdown-content bg-white z-[1] menu  shadow  rounded-box w-52">--%>
+<%--                                <li><a>Phone number</a></li>--%>
+<%--                                <li><a>Email</a></li>--%>
+<%--                            </ul>--%>
+                            <select class="p-2 w-24 " name="searchField" id="searchField">
+                                <option selected value="firstName">name</option>
+                                <option value="phone">Phone number</option>
+                                <option value="email">Email</option>
+                            </select>
                         </div>
                     </div>
                     <!-- search button -->
@@ -145,14 +151,14 @@
                             <td class="flex items-center justify-start [1px] border-solid border-[#eeeeee]">
                                 <a href="${pageContext.request.contextPath}/employee/detail?id=<%=employee.getId()%>"
                                    class="p-2 cursor-pointer gap-1 rounded-l-sm text-[#347ab6]  px-4 flex items-center
-                                            justify-center ">
+                                            justify-center">
                                     <i class="fa-solid fa-eye"></i>
                                     <span>View</span>
                                 </a>
                                 |
                                 <a href="${pageContext.request.contextPath}/employee/delete?id=<%=employee.getId()%>"
                                    class="p-2 cursor-pointer gap-1  rounded-l-sm text-red-700  px-4 flex items-center
-                                        justify-center ">
+                                        justify-center">
                                     <i class="fa-solid fa-trash"></i>
                                     <span>Delete</span>
                                 </a>

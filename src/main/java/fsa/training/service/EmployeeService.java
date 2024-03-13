@@ -18,4 +18,7 @@ public interface EmployeeService {
     public boolean delete(long id);
 
     public Employee findById(long id);
+
+//     search by field name
+    public List<EmployeeListDto> search(String field, String value, int page, int size);
 }

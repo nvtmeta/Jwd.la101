@@ -16,4 +16,7 @@ public interface EmployeeDao {
     void delete(long id);
 
     Employee getById(long id);
+
+    //    search by field name
+    List<Employee> searchByField(String fieldName, String fieldValue, int page, int size);
 }

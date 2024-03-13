@@ -144,10 +144,10 @@
 
                     <!-- submit , reset. add -->
                     <div class="flex mt-3 gap-3">
-                        <div class="text-white btn btn-info">
+                        <a href="${pageContext.request.contextPath}/employee/list" class="text-white btn btn-info">
                             <i class="fa-solid fa-backward"></i>
                             <span>Back</span>
-                        </div>
+                        </a>
                     </div>
                 </form>
             </div>

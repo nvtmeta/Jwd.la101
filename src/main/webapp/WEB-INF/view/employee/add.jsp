@@ -113,7 +113,7 @@
                             Status
                         </label>
                         <div class="ml-20 mt-6 flex items-center gap-3">
-                            <input name="status" type="checkbox" value="1" class="checkbox"/>
+                            <input required name="status" type="checkbox" value="1" class="checkbox"/>
                             <span>Active</span>
                         </div>
                     </div>
@@ -123,8 +123,8 @@
                             <span class="text-red-500">(*)</span>
                         </label>
                         <select required name="departmentName" class="select select-bordered w-full">
-                            <option disabled selected>Fsoft Academy</option>
-                            <option>Fpt Automation</option>
+                            <option value="fsoft academy"  selected>Fsoft Academy</option>
+                            <option value="fpt automation">Fpt Automation</option>
                         </select>
                     </div>
                     <div class="flex flex-col">

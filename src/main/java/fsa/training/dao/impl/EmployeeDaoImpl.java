@@ -3,9 +3,7 @@ package fsa.training.dao.impl;
 import fsa.training.dao.EmployeeDao;
 import fsa.training.model.entity.Employee;
 import fsa.training.utils.HibernateUtils;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -84,4 +82,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
     }
 
+    @Override
+    public List<Employee> searchByField(String fieldName, String fieldValue, int page, int size) {
+        try (Session session = HibernateUtils.getSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Employee> query = builder.createQuery(Employee.class);
+            Root<Employee> root = query.from(Employee.class);
+
+            // Use a case-insensitive comparison for the field name
+            Expression<String> expression = builder.lower(root.get(fieldName));
+            Predicate predicate = builder.equal(expression, fieldValue);
+
+//                        Join<Employee, Account> accountJoin = root.join("account");
+//
+//            // Use a case-insensitive comparison for the field name
+//            Expression<String> expression = builder.lower(accountJoin.get(fieldName));
+
+            query.select(root).where(predicate);
+
+            return session.createQuery(query)
+                    .setMaxResults(size)
+                    .setFirstResult(size * (page - 1))
+                    .getResultList();
+        }
+    }
 }

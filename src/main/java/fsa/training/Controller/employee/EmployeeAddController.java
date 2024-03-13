@@ -27,10 +27,19 @@ public class EmployeeAddController extends HttpServlet {
         String phone = req.getParameter("phoneNumber");
         LocalDate dateOfBirth = LocalDate.parse(req.getParameter("dateOfBirth"));
         int gender = Integer.parseInt(req.getParameter("gender"));
-        String address = req.getParameter("address");
+
         int status = Integer.parseInt(req.getParameter("status"));
         String department = req.getParameter("departmentName");
-        String remark = req.getParameter("remark");
+
+        String address = null;
+        if (req.getParameter("address") != null) {
+            address = req.getParameter("address");
+        }
+        String remark = null;
+        if (req.getParameter("remark") != null) {
+            remark = req.getParameter("remark");
+        }
+
         String account = req.getParameter("account");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -41,7 +50,6 @@ public class EmployeeAddController extends HttpServlet {
         System.out.println("dateOfBirth = " + dateOfBirth);
         System.out.println("gender = " + gender);
         System.out.println("address = " + address);
-        System.out.println("status = " + status);
         System.out.println("department = " + department);
         System.out.println("remark = " + remark);
         System.out.println("account = " + account);

@@ -1,5 +1,7 @@
 package fsa.training.Controller;
 
+import fsa.training.service.LoginService;
+import fsa.training.service.impl.LoginServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginController", value = {"/login", "/login.html"})
 public class LoginController extends HttpServlet {
+
+    private final LoginService employeeService = new LoginServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/view/auth/login.jsp").forward(req, resp);
@@ -20,7 +24,10 @@ public class LoginController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         System.out.println("username = " + username + ", password = " + password);
-        if ("admin".equalsIgnoreCase(username) && "admin".equalsIgnoreCase(password)) {
+
+//        check user exist on database
+
+        if (employeeService.checkLogin(username, password)) {
             req.getSession().setAttribute("account", username);
             System.out.println("Đăng nhập thành công");
             resp.sendRedirect(req.getContextPath() + "/employee/list");
